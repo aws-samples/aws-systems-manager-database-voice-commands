@@ -54,8 +54,7 @@ The demo has been tested in Virginia (us-east-1) but you can change the region i
     * AmazonSSMFullAccess
 
 
-1.	Create an IAM role that will be associated with the RDS "sample" database created in this demo. Here the policies needed:
-    * AmazonRDSEnhancedMonitoringRole
+1.	Create an IAM role that will be associated with the RDS "sample" database created in this demo. It will contain the policy "AmazonRDSEnhancedMonitoringRole" (on the IAM main dahboard, click on "Roles", "Create role", select "RDS" and "RDS - Enhanced Monitoring")
     
 1. Create an IAM user with name "nopermissions" with the following characteristics:
     * Programmatic access enabled
