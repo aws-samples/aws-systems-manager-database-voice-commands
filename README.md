@@ -11,12 +11,12 @@ This sample code is made available under a modified MIT license. See the LICENSE
 ### Pre-requirements
 
 Choose the region where you want to create the infrastructure and verify if Lambda can be triggered by an Alexa Skill (this feature is not available everywhere yet).
-The demo works with fewer tasks in Virginia (us-east-1) but you can change it if needed.
+The demo has been tested in Virginia (us-east-1) but you can change the region if needed.
 
-1. You have to create an EC2 key pair in the region you want to deploy the infrastructure. The key pair will be associated to the database client
+1. Create an EC2 key pair in the region you want to deploy the infrastructure. The key pair will be associated to the database client
 
 
-1.	You have to create an S3 bucket in the region you want to deploy the infrastructure. Inside the bucket you have to define the following hierarchy and upload the files in attached:
+1.	Create an S3 bucket in the region you want to deploy the infrastructure. Inside the bucket you have to define the following hierarchy and upload the files in attached:
 
     **Your-S3-bucket-name**
     * Directory **binaries**
@@ -30,6 +30,7 @@ The demo works with fewer tasks in Virginia (us-east-1) but you can change it if
       * oracle_checkparameter.sql
       * oracle_statusdb.sql
       * oracle_tablespaceusage.sql
+      * oracle_show_top_session_by_cpu.sql
     * Directory **templates**
       * alexards_compute.template
       * alexards_global.template
@@ -40,13 +41,13 @@ The demo works with fewer tasks in Virginia (us-east-1) but you can change it if
     (*) The Oracle client binaries are required in order to work with the Oracle "sample" database created in this demo. You have to download the two binaries separately and stored them into the "binaries" directory in the S3 bucket. The minimum version required is the 11.2.0.4
 
 
-1.	You have to create an SNS Topic. The SNS Topic will be used in order to receive the information requested and the logs via e-mail
+1.	Create an SNS Topic. The SNS Topic will be used in order to receive the information requested and the logs via e-mail
 
 
-1.	You have to create an e-mail SNS Subscriber for the SNS Topic created in the previous step
+1.	Create an e-mail SNS Subscriber for the SNS Topic created in the previous step
 
 
-1.	You have to create an IAM role that will be associated with the Lambda function. Here the policies needed:
+1.	Create an IAM role that will be associated with the Lambda function. Here the policies needed:
     * AmazonRDSFullAccess
     * AmazonEC2FullAccess
     * AWSLambdaFullAccess
@@ -61,7 +62,7 @@ The demo works with fewer tasks in Virginia (us-east-1) but you can change it if
       * [ex.] "TemplateURL": "https://s3.[region_to_replace].amazonaws.com/[name_to_replace]/templates/alexards_network.template"
       * [ex.] "TemplateURL": https://s3.eu-west-2.amazonaws.com/alexards-london-bck-2019/templates/alexards_network.template
 
-    * Substitute the names of the Oracle binaries if you are using a different version in the in the alexards_compute.template:
+    * Substitute the names of the Oracle binaries if you are using a different version in the alexards_compute.template:
       * [ex.] "aws s3 cp s3://[name_to_replace]/binaries/oracle-instantclient11.2-basic-11.2.0.4.0-1.x86_64.rpm .","\n",
       * [ex.] "aws s3 cp s3://alexards-london-bck-2019/binaries/oracle-instantclient12.2-basic-12.2.0.1.0-1.x86_64.rpm .","\n",
 
@@ -82,12 +83,12 @@ The demo works with fewer tasks in Virginia (us-east-1) but you can change it if
 ## Deploy the infrastructure with AWS CloudFormation
 
 Choose the region where you want to deploy your infrastructure and then submit the alexards_global.template to CloudFormation.
-The creation will take a while because the RDS instance and the related secondary.
+The creation will take a while because the RDS master instance and the related secondary instance.
 
 
 ## Create the Alexa skill
 
-Now you have to create the Alexa skill:
+Create now the Alexa skill:
 
 1.	Sign-in on https://developer.amazon.com/alexa
 
