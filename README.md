@@ -106,7 +106,7 @@ Create now the Alexa skill:
     * Template: Start from scratch
 
 1.	Click on "JSON Editor":
-    1. Copy and Paste the content of the file alexa_skill_v2
+    1. Copy and Paste the content of the file alexa_skill_v<x>
     1. Click on "Save Model"
 
 1.	Click on "Endpoint"
