@@ -106,7 +106,7 @@ Create now the Alexa skill:
     * Template: Start from scratch
 
 1.	Click on "JSON Editor":
-    1. Copy and Paste the content of the file alexa_skill_v<x>
+    1. Copy and Paste the content of the file alexa_skill_vx
     1. Click on "Save Model"
 
 1.	Click on "Endpoint"
@@ -187,6 +187,6 @@ Here the list of all the utterances you could try:
   
   * show top session by cpu for sample instance in virginia
 
-  * reboot sample instance in virginia mfa <mfa token>
+  * reboot sample instance in virginia mfa 123456
 
-  * failover sample instance in virginia mfa <mfa token>
+  * failover sample instance in virginia mfa 789456
