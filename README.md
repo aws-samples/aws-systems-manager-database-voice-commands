@@ -54,8 +54,14 @@ The demo has been tested in Virginia (us-east-1) but you can change the region i
     * AmazonSSMFullAccess
 
 
-1.	You have to create an IAM role that will be associated with the RDS "sample" database created in this demo. Here the policies needed:
+1.	Create an IAM role that will be associated with the RDS "sample" database created in this demo. Here the policies needed:
     * AmazonRDSEnhancedMonitoringRole
+    
+1. Create an IAM user with name "nopermissions" with the following characteristics:
+    * Programmatic access enabled
+    * No policies associated
+    * No groups assigned
+    * MFA authentication enabled
 
 1.	Before submit the *.template files, you need to modify them according with the bucket you have created and the region you have chosen:
     * Substitute the string "region_to_replace" and "name_to_replace" with the name of the region you have chosen and the name of your bucket in the alexards_global.template and in the alexards_compute.template
@@ -130,7 +136,19 @@ After the successful creation of the infrastructure by CloudFormation, you have 
 
 1.	Publish the Alert log of the RDS instance on CloudwatchLogs:
     * Alert log
+    
+1. Create the following three AWS Systems Manager Parameter Store parameters (you didn't do this before because Cloudformation doesn't support yet the SecureString parameter type:
+    * name: /rds/configuration/nopermissions/accnum
+    * type: SecureString
+    * value: your current AWS Account Number
+    
+    * name: /rds/configuration/nopermissions/ak
+    * type: SecureString
+    * value: Access Key ID of the IAM user "nopermissions"
 
+    * name: /rds/configuration/nopermissions/sak
+    * type: SecureString
+    * value: Secret Access Key of the IAM user "nopermissions"
 
 ## Test the skill
 
@@ -167,7 +185,9 @@ Here the list of all the utterances you could try:
   * parameter open cursors for sample instance in virginia
 
   * check alert log of sample instance in virginia
+  
+  * show top session by cpu for sample instance in virginia
 
-  * reboot sample instance in virginia
+  * reboot sample instance in virginia mfa <mfa token>
 
-  * failover sample instance in virginia
+  * failover sample instance in virginia mfa <mfa token>
