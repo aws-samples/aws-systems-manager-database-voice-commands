@@ -47,11 +47,50 @@ The demo has been tested in Virginia (us-east-1) but you can change the region i
 1.	Create an e-mail SNS Subscriber for the SNS Topic created in the previous step
 
 
-1.	Create an IAM role that will be associated with the Lambda function. Here the policies needed:
-    * AmazonRDSFullAccess
-    * AmazonEC2FullAccess
-    * AWSLambdaFullAccess
-    * AmazonSSMFullAccess
+1.	Create an IAM role that will be associated with the Lambda function. Here the AWS managed and the customer policies needed:
+    * AmazonRDSFullAccess (AWS managed)
+    * CustomEC2Access (Customer managed)
+      * cloudwatch:GetMetric*
+      * cloudwatch:DescribeAlarm*
+      * ec2:DescribeInstance*
+    * CustomLambdaAccess (AWS managed)
+      * "cloudformation:DescribeChangeSet
+      * "cloudformation:DescribeStackResources
+      * "cloudformation:DescribeStacks
+      * "cloudformation:GetTemplate
+      * "cloudformation:ListStackResources
+      * "cloudwatch:*
+      * "cognito-identity:ListIdentityPools
+      * "cognito-sync:GetCognitoEvents
+      * "cognito-sync:SetCognitoEvents
+      * "ec2:DescribeSecurityGroups
+      * "ec2:DescribeSubnets
+      * "ec2:DescribeVpcs
+      * "events:*
+      * "iam:GetPolicy
+      * "iam:GetPolicyVersion
+      * "iam:GetRole
+      * "iam:GetRolePolicy
+      * "iam:ListAttachedRolePolicies
+      * "iam:ListRolePolicies
+      * "iam:ListRoles
+      * "iam:PassRole
+      * "lambda:*
+      * "logs:*
+      * "s3:*
+      * "sns:ListSubscriptions
+      * "sns:ListSubscriptionsByTopic
+      * "sns:ListTopics
+      * "sns:Publish
+      * "sns:Subscribe
+      * "sns:Unsubscribe
+      * "sqs:ListQueues
+      * "sqs:SendMessage
+      * "tag:GetResources
+    * CustomSSMAccess (Customer managed)
+      * ssm:GetParameter*
+      * ssm:SendCommand
+      * ssm:GetCommandInvocation
 
 
 1.	Create an IAM role that will be associated with the RDS "sample" database created in this demo. It will contain the policy "AmazonRDSEnhancedMonitoringRole" (on the IAM main dahboard, click on "Roles", "Create role", select "RDS" and "RDS - Enhanced Monitoring")
